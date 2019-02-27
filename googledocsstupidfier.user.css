@@ -1,0 +1,197 @@
+    /* ==UserStyle==
+@name         Google Docs Stupidfier
+@description  Give google docs a terrible look
+@namespace    GoogleDocsStupidfier
+@author       me
+@version      0.0.1
+@preprocessor stylus
+
+@var checkbox enabled                    "Enable Styles"                           0
+
+@var checkbox rotateTool                 "Rotating Toolbar Icons"                  0
+@var checkbox modalEpilepsy              "Epileptic Background for a modal dialog" 0
+@var checkbox rotatingMenu               "Rotating menus"                          0
+@var checkbox openCloseSidebar           "Opening and closing Sidebar"             0
+@var checkbox rotatingCommentIcon        "Rotating Comment Icon"                   0
+@var checkbox rotatingModalDialog        "Rotating Modal Dialog"                   0
+@var checkbox scalingComments            "Scaling Comments"                        0
+
+@var color    modalEpilepsy1             "Epileptic Colour 1"                      #ff0000
+@var color    modalEpilepsy2             "Epileptic Colour 2"                      #ffe500
+@var color    modalEpilepsy3             "Epileptic Colour 3"                      #2dff00
+@var color    modalEpilepsy4             "Epileptic Colour 4"                      #001aff
+@var color    modalEpilepsy5             "Epileptic Colour 5"                      #e900ff
+@var color    modalEpilepsy6             "Epileptic Colour 6"                      #ff268a
+
+@var select   rotatingCommentIconOption  "Rotating Comment Icon: Listner"          ["hover:On Hover", "always:Always*"]
+@var range    rotatingCommentIconSpeed   "Rotating Comment Icon: Speed"            [0.2, 0.1, 10, 0.1, "s"]
+@var range    rotatingModalDialogSpeed   "Rotating Modal Dialog: Speed"            [1, 0.1, 10, 0.1, "s"]
+@var range    rotatingMenuSpeed          "Rotating Menu: Speed"                    [1, 0.1, 10, 0.1, "s"]
+@var range    scalingCommentsSpeed       "Scaling Comments: Speed"                 [0.2, 0.1, 10, 0.1, "s"]
+
+
+
+
+==/UserStyle== */
+    @-moz-document domain("docs.google.com") {
+        if enabled {
+            if rotateTool {
+                .goog-toolbar-button-inner-box {
+                    animation: spin 1s linear infinite !important;
+                }
+                .goog-toolbar-button-inner-box:hover {
+                    animation: scale_rotate_half_small 2s linear infinite !important;
+                }
+                .goog-toolbar-button-checked .goog-toolbar-button-inner-box {
+                    animation: scale_rotate_half_big 2s linear infinite !important;
+                }
+                .goog-menuitem-icon {
+                    animation: spin 0.2s linear infinite reverse !important;
+                }
+            }
+            if modalEpilepsy {
+                .modal-dialog-bg {
+                    animation: throwUp 1s cubic-bezier(0, 2.2, 0, -5.27) infinite;
+                }
+            }
+            if rotatingMenu {
+                .goog-menu {
+                    animation: spin rotatingMenuSpeed linear infinite;
+                }
+            }
+            if openCloseSidebar {
+                .left-sidebar-container {
+                    animation: left_right 1s linear infinite;
+                }
+            }
+            if rotatingCommentIcon {
+                if rotatingCommentIconOption==hover {
+                    .docs-appbar-circle-button:hover {
+                        animation: scale_rotate_half rotatingCommentIconSpeed linear infinite;
+                    }
+                }
+                else if rotatingCommentIconOption==always {
+                    .docs-appbar-circle-button {
+                        animation: scale_rotate_half rotatingCommentIconSpeed linear infinite;
+                    }
+                }
+            }
+            if rotatingModalDialog {
+                .modal-dialog-content {
+                    animation: scale_rotate_half_small rotatingModalDialogSpeed linear infinite;
+                }
+                .modal-dialog {
+                    animation: scale_rotate_half_big rotatingModalDialogSpeed linear infinite;
+                }
+            }
+            if scalingComments {
+                .docos-docoview-tesla-conflict {
+                    animation: scale scalingCommentsSpeed linear infinite;
+                }
+            }
+        }
+    }
+
+
+    /* STYLES*/
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes spin_worse {
+        0%,
+        100% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+    }
+    @keyframes left_right {
+        0%,
+        100% {
+            left: 0;
+        }
+        50% {
+            left: -280px;
+        }
+    }
+    @keyframes right_left {
+        0%,
+        100% {
+            left: 280px;
+        }
+        50% {
+            left: 0;
+        }
+    }
+
+    @keyframes throwUp {
+        0% {
+            background: modalEpilepsy1;
+        }
+        18% {
+            background: modalEpilepsy2;
+        }
+        36% {
+            background: modalEpilepsy3;
+        }
+        54% {
+            background: modalEpilepsy4;
+        }
+        72% {
+            background: modalEpilepsy5;
+        }
+        100% {
+            background: modalEpilepsy6;
+        }
+    }
+    @keyframes scale {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+    }
+    @keyframes scale_rotate_half {
+        0%,
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(1.5) rotate(360deg);
+        }
+    }
+    @keyframes scale_rotate_half_big {
+        0%,
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(2) rotate(360deg);
+        }
+    }
+    @keyframes scale_rotate_half_small {
+        0%,
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(0) rotate(360deg);
+        }
+    }
+    @keyframes moving {
+        0%,
+        100% {
+            left: -245px;
+        }
+        50% {
+            left: 255px;
+        }
+    }
